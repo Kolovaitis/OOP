@@ -1,4 +1,6 @@
-package sample;
+package sample.Shapes;
+
+import sample.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +15,14 @@ public class Rectangle extends PoligonShape {
     }
 
     @Override
-    double getSquare() {
+    public double getSquare() {
         return width * height;
+    }
+
+    @Override
+    public void renewSize(Coordinate coordinate) {
+        this.width = coordinate.x - this.coordinate.x;
+        this.height = coordinate.y - this.coordinate.y;
     }
 
 

@@ -1,4 +1,7 @@
-package sample;
+package sample.Shapes;
+
+import sample.Coordinate;
+import sample.Viewable.Viewable;
 
 public class Section extends Shape {
 
@@ -10,8 +13,13 @@ public class Section extends Shape {
     }
 
     @Override
-    double getSquare() {
+    public double getSquare() {
         return 0;
+    }
+
+    @Override
+    public void renewSize(Coordinate coordinate) {
+        endCoordinate = coordinate;
     }
 
     @Override

@@ -1,4 +1,7 @@
-package sample;
+package sample.Shapes;
+
+import sample.Coordinate;
+import sample.Viewable.Viewable;
 
 import java.util.List;
 

@@ -1,17 +1,21 @@
-package sample;
+package sample.Viewable;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import sample.Coordinate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CanvasPainter implements Viewable {
     private GraphicsContext gc;
-
-    public CanvasPainter(GraphicsContext gc){
-        this.gc = gc;
+    private Canvas canvas;
+    public CanvasPainter(Canvas canvas,Color strokeColor, Color fillColor, double lineWidth){
+        this.gc = canvas.getGraphicsContext2D();
+        this.setStrokeColor(strokeColor);
+        this.setLineWidth(lineWidth);
+        this.setFillColor(fillColor);
+        this.canvas = canvas;
     }
 
     public void setStrokeColor(Color strokeColor) {
@@ -58,4 +62,15 @@ public class CanvasPainter implements Viewable {
         gc.fillOval(start.x, start.y, width, height);
         gc.strokeOval(start.x, start.y, width, height);
     }
+
+    @Override
+    public void drawText(Coordinate start, String text) {
+        gc.strokeText(text, start.x, start.y);
+    }
+
+    @Override
+    public void clear() {
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    }
+
 }

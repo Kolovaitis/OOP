@@ -1,4 +1,7 @@
-package sample;
+package sample.Shapes;
+
+import sample.Coordinate;
+import sample.Viewable.Viewable;
 
 public class Circle extends Shape {
     private double radius;
@@ -17,8 +20,13 @@ public class Circle extends Shape {
     }
 
     @Override
-    double getSquare() {
-        return Math.PI*Math.pow(radius, 2);
+    public double getSquare() {
+        return Math.PI * Math.pow(radius, 2);
+    }
+
+    @Override
+    public void renewSize(Coordinate coordinate) {
+        this.radius = Math.sqrt(Math.pow(this.coordinate.x-coordinate.x, 2)+ Math.pow(this.coordinate.y-coordinate.y,2));
     }
 
     @Override

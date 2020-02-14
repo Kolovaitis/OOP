@@ -1,4 +1,7 @@
-package sample;
+package sample.Shapes;
+
+import sample.Coordinate;
+import sample.Viewable.Viewable;
 
 public class Oval extends Shape {
     private double width, height;
@@ -10,8 +13,14 @@ public class Oval extends Shape {
     }
 
     @Override
-    double getSquare() {
+    public double getSquare() {
         return Math.PI * width * height / 4;
+    }
+
+    @Override
+    public void renewSize(Coordinate coordinate) {
+        this.width = coordinate.x - this.coordinate.x;
+        this.height = coordinate.y - this.coordinate.y;
     }
 
     @Override

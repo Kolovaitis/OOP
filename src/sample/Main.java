@@ -7,32 +7,38 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import sample.Viewable.CanvasPainter;
 
 public class Main extends Application {
     private Model model;
-    private Canvas canvas;
+    private Canvas previewCanvas;
+    private Canvas mainCanvas;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+
+        String path = "sample.fxml";
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(getClass().getResource(path).openStream());
         primaryStage.setTitle("Lab_1");
         Scene scene = new Scene(root, 800, 640);
         primaryStage.setScene(scene);
         primaryStage.show();
-        canvas = (Canvas) scene.lookup("#canvas");
+        mainCanvas = (Canvas) scene.lookup("#canvas");
+        previewCanvas = (Canvas) scene.lookup("#preview");
         initModel();
+        Controller controller = fxmlLoader.getController();
+        controller.setModel(model);
+        controller.setScene(scene);
     }
 
-    private CanvasPainter getPainter(Canvas canvas) {
-        CanvasPainter painter = new CanvasPainter(canvas.getGraphicsContext2D());
-        painter.setFillColor(Color.BURLYWOOD);
-        painter.setLineWidth(5);
-        painter.setStrokeColor(Color.CORNFLOWERBLUE);
-        return painter;
-    }
+
+
 
     private void initModel() {
-        model = new Model(getPainter(canvas));
+        CanvasPainter mainPainter = new CanvasPainter(mainCanvas, Color.BURLYWOOD,Color.CORNFLOWERBLUE, 5);
+        CanvasPainter previewPainter = new CanvasPainter(previewCanvas, Color.BURLYWOOD,Color.CORNFLOWERBLUE, 1);
+        model = new Model(mainPainter,previewPainter);
         model.drawSample();
     }
 
