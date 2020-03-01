@@ -9,4 +9,5 @@ public class OvalCreator implements Creator {
     public Shape create(Coordinate coordinate) {
         return new Oval(coordinate, 0, 0);
     }
+
 }

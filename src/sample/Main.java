@@ -24,6 +24,7 @@ public class Main extends Application {
         Scene scene = new Scene(root, 800, 640);
         primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.setResizable(false);
         mainCanvas = (Canvas) scene.lookup("#canvas");
         previewCanvas = (Canvas) scene.lookup("#preview");
         initModel();
@@ -31,9 +32,6 @@ public class Main extends Application {
         controller.setModel(model);
         controller.setScene(scene);
     }
-
-
-
 
     private void initModel() {
         CanvasPainter mainPainter = new CanvasPainter(mainCanvas, Color.BURLYWOOD,Color.CORNFLOWERBLUE, 5);

@@ -40,7 +40,6 @@ public class CanvasPainter implements Viewable {
 
     @Override
     public void drawPoligon(List<Coordinate> points) {
-        //Осторожно говнокод!
         double[]x = new double[points.size()];
         double[]y = new double[points.size()];
         for(int i = 0; i< points.size();i++){
@@ -59,8 +58,15 @@ public class CanvasPainter implements Viewable {
 
     @Override
     public void drawOval(Coordinate start, double width, double height) {
-        gc.fillOval(start.x, start.y, width, height);
-        gc.strokeOval(start.x, start.y, width, height);
+        Coordinate correct = correctCoordinate(start, width, height);
+        width = Math.abs(width);
+        height = Math.abs(height);
+        gc.fillOval(correct.x, correct.y, width, height);
+        gc.strokeOval(correct.x, correct.y, width, height);
+    }
+
+    private Coordinate correctCoordinate(Coordinate start, double width, double height) {
+        return new Coordinate(width<0?start.x+width:start.x, height<0?start.y+height:start.y);
     }
 
     @Override
